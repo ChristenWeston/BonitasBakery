@@ -87,7 +87,7 @@ namespace Bakery.Controllers
     public ActionResult Edit(int id)
     {
       var thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-      return View(thisFlavor);
+      return View(thisTreat);
     }
 
     [HttpPost]
@@ -98,7 +98,7 @@ namespace Bakery.Controllers
 
       _db.Entry(treat).State = EntityState.Modified;
       _db.SaveChanges();
-      bool duplicate = _db.FlavorTreats.Any(join => join.FlavorId == FlavorId && join.Treatd == treat.TreatId);
+      bool duplicate = _db.FlavorTreats.Any(join => join.FlavorId == FlavorId && join.TreatId == treat.TreatId);
       if (FlavorId !=0 && !duplicate)
       {
         _db.FlavorTreats.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId});
