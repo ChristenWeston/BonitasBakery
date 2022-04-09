@@ -5,16 +5,17 @@
 @model Bakery.Models.Flavor
 
 <h4>Add a new flavor</h4>
-<div class="w-50">
+<div>
   @using (Html.BeginForm())
   {
     <div class="form-group">
       @Html.LabelFor(model => model.Name)
       @Html.TextBoxFor(model => model.Name, new { @class="form-control", placeholder="Name", required="required" })
     </div>
+
     <div class="form-group">
       @Html.Label("Select Treat")
-      @Html.DropDownList("TreatId", ViewBag.TreatId, "Select Treat", new { @class = "form-control"})
+      @Html.DropDownList("TreatId", ViewBag.TreatId, "Select Treat", new { @class = "form-select"})
     </div>
     <br>
 
