@@ -79,7 +79,7 @@ namespace Bakery.Controllers
         .Include(treat => treat.JoinEntities)
         .ThenInclude(join => join.Flavor)
         .FirstOrDefault(treat => treat.TreatId == id);
-      ViewBag.FlavorsTreats = _db.FlavorTreats.ToList();
+      ViewBag.FlavorsTreats = _db.FlavorTreats.Where(entry => entry.TreatId == id).ToList();
       return View(thisTreat);
     }
 
@@ -131,15 +131,15 @@ namespace Bakery.Controllers
       var currentUser = await _userManager.FindByIdAsync(userId);
       ViewBag.PageTitle = "Remove this Flavor from this Treat";
       var joinEntry = _db.FlavorTreats.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
-      if (joinEntry.User.Id == userId)
-      {
+      // if (joinEntry.User.Id == userId)
+      // {
         _db.FlavorTreats.Remove(joinEntry);
         _db.SaveChanges();
-      }
-      else
-      {
-        Console.WriteLine("You don't have authorization to delete this.");
-      }
+      // }
+      // else
+      // {
+      //   Console.WriteLine("You don't have authorization to delete this.");
+      // }
       return RedirectToAction("Index");
     }
   }
