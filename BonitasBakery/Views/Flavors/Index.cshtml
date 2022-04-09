@@ -1,0 +1,31 @@
+@{
+  Layout = "_Layout";
+}
+
+@using Bakery.Models;
+@model IEnumerable<Bakery.Models.Flavor>;
+
+<h1>Flavors</h1>
+
+@if (@Model.Any())
+{
+  <ul class="list-group">
+    @foreach (Flavor flavor in Model)
+    {
+      <li class="list-group-item d-flex justify-content-between align-items-center">@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId })
+      <span class="badge bg-primary rounded-pill">@flavor.JoinEntities.Count()</span>
+      </li>
+    }
+  </ul>
+}
+else
+{
+  <div class="text-center">
+    <h3>No Flavors have been added yet!</h3>
+    <p>Click below to create one.</p>
+  </div>
+}
+<br>
+
+@Html.ActionLink("Add Flavor", "Create", new { }, new { @class = "btn btn-primary"})
+@Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "btn btn-primary"})
