@@ -79,7 +79,7 @@ namespace Bakery.Controllers
         .Include(flavor => flavor.JoinEntities)
         .ThenInclude(join => join.Treat)
         .FirstOrDefault(flavor => flavor.FlavorId == id);
-      ViewBag.FlavorsTreats = _db.FlavorTreats.ToList();
+      ViewBag.FlavorsTreats = _db.FlavorTreats.Where(entry => entry.FlavorId == id).ToList();
       return View(thisFlavor);
     }
 
