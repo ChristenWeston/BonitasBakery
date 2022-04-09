@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Flavor
+
+<h4>Add a new flavor</h4>
+<div class="w-50">
+  @using (Html.BeginForm())
+  {
+    <div class="form-group">
+      @Html.LabelFor(model => model.Name)
+      @Html.TextBoxFor(model => model.Name, new { @class="form-control", placeholder="Name", required="required" })
+    </div>
+    <div class="form-group">
+      @Html.Label("Select Treat")
+      @Html.DropDownList("TreatId", ViewBag.TreatId, "Select Treat", new { @class = "form-control"})
+    </div>
+    <br>
+
+    <input type="submit" value="Add New Flavor" class="btn btn-info" />
+  }
+</div>
+@if (ViewBag.SuccessMessage !=null)
+{
+  @if (ViewBag.SuccessMessage != "Not a duplicate")
+  {
+    <text>
+      <script>
+        alert('This flavor already exists!');
+      </script>
+    </text>
+  }
+}
+<br>
+@Html.ActionLink("Back to Flavors", "Index", new { }, new { @class = "btn btn-primary"})
