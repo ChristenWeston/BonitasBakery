@@ -5,18 +5,42 @@
 @using Bakery.Models;
 @model IEnumerable<Bakery.Models.Flavor>;
 
-<h1>Flavors</h1>
-
 @if (@Model.Any())
 {
-  <ul class="list-group">
-    @foreach (Flavor flavor in Model)
+    <h1 class="my-4">The Goods:</h1>
+
+    @if (@Model.Count() == 0)
     {
-      <li class="list-group-item d-flex justify-content-between align-items-center">@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId })
-      <span class="badge bg-primary rounded-pill">@flavor.JoinEntities.Count()</span>
-      </li>
+      <h3>No Flavors!</h3>
     }
-  </ul>
+  <ul>
+    <table class="table table-hover">
+      <thead>
+        <tr class="table-active">
+          <th scope="col">Flavor</th>
+          <th scope="col">Treats</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="table-active">
+          @foreach (Flavor flavor in @Model)
+          {
+            <tr class="table-active">
+            <th>@Html.ActionLink($"{flavor.Name}", "Details", new { id = flavor.FlavorId }, new { @class = "text-white"})</th>
+            <th>
+              @foreach(var treat in @flavor.JoinEntities)
+              {
+                @Html.ActionLink($"{treat.Treat.Name}", "Details", new { id = treat.TreatId }, new { @class = "text-white"})
+                <br>
+              }
+            </th>
+            </tr> 
+          }     
+        </tr>
+      </tbody>
+    </table>
+    </ul>
+
 }
 else
 {
