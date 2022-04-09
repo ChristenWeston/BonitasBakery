@@ -4,14 +4,14 @@
 
 @using System.Security.Claims
 
-<h2>Let's authorize you!</h2>
+<h2>Your Account</h2>
 <hr />
 @if (User.Identity.IsAuthenticated)
 {
     <p>Hello @User.Identity.Name!</p>
     @using (Html.BeginForm("LogOff", "Account"))
     {
-        <input type="submit" class="btn btn-info" value="Log out" />
+        <input type="submit" class="btn btn-danger" value="Log out" />
     }
     <p>@Html.ActionLink("Home", "Index", "Home")</p>
 }
