@@ -1,0 +1,34 @@
+@{
+  Layout = "_Layout";
+}
+
+@model Bakery.Models.Treat;
+
+<h2>Treat Details</h2>
+<hr />
+<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)</h3>
+
+@if(@ViewBag.FlavorsTreats.Count == 0)
+{
+  <p>No Flavors for this treat!</p>
+}
+else
+{
+  <h4>Flavors for this treat:</h4>
+
+  @foreach(var entry in ViewBag.FlavorsTreats)
+  {
+    int joinId = entry.FlavorTreatId;
+    
+    <li>@entry.Flavor.Name </li>
+    @using (Html.BeginForm("DeleteFlavor", "Treats"))
+    {
+      @Html.Hidden("joinId", joinId)
+      <input type="submit" value="Delete"class="btn btn-info btn-sm"/>
+    }
+  }
+}
+
+@Html.ActionLink("Back to list", "Index", new {}, new { @class = "btn btn-primary"})
+@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId }, new { @class = "btn btn-primary"})
+@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId }, new { @class = "btn btn-primary"})
