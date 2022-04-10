@@ -30,7 +30,7 @@
             <th>
               @foreach(var treat in @flavor.JoinEntities)
               {
-                @Html.ActionLink($"{treat.Treat.Name}", "Details", new { id = treat.TreatId }, new { @class = "text-white"})
+                @Html.ActionLink($"{treat.Treat.Name}", "Details", "Treats", new { id = treat.TreatId }, new { @class = "text-white"})
                 <br>
               }
             </th>
